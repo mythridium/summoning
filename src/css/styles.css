@@ -1,0 +1,27 @@
+#summoning-status {
+    position: fixed;
+    bottom: 10px;
+    left: 250px;
+    display: flex;
+}
+
+#summoning-status .overlay-container {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    max-width: 100%;
+    padding: 0px;
+    margin-right: 5px;
+}
+
+#summoning-status .overlay-container img {
+    margin: 0;
+    margin-bottom: 1px;
+    cursor: initial;
+}
+
+#summoning-status .overlay-container span {
+    position: initial;
+    padding: 0;
+    line-height: 16px;
+}

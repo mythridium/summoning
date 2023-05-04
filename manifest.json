@@ -1,0 +1,4 @@
+{
+    "namespace": "mythSummoningStatus",
+    "setup": "setup.mjs"
+}
