@@ -1,24 +1,27 @@
 {
     "name": "myth-summoning-status",
     "version": "1.0.1",
-    "description": "",
-    "main": "index.js",
+    "description": "Melvor Idle mod that shows summoning tablets on the ui",
+    "main": "manifest.json",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "pack": "webpack",
-      "zip": "node scripts/zip.js",
-      "build": "webpack && node scripts/zip.js"
+        "pack": "webpack",
+        "zip": "node scripts/zip.js",
+        "build": "webpack && node scripts/zip.js"
     },
-    "keywords": [],
-    "author": "",
+    "author": "Mythridium",
     "license": "ISC",
     "devDependencies": {
-      "archiver": "^5.3.1",
-      "copy-webpack-plugin": "^11.0.0",
-      "css-loader": "^6.7.1",
-      "del": "^7.0.0",
-      "style-loader": "^3.3.1",
-      "webpack": "^5.74.0",
-      "webpack-cli": "^4.10.0"
+        "@types/jquery": "3.5.16",
+        "archiver": "5.3.1",
+        "copy-webpack-plugin": "11.0.0",
+        "css-loader": "6.7.3",
+        "del": "7.0.0",
+        "sass": "1.62.1",
+        "sass-loader": "13.2.2",
+        "style-loader": "3.3.2",
+        "ts-loader": "9.4.2",
+        "typescript": "5.0.4",
+        "webpack": "5.82.0",
+        "webpack-cli": "4.10.0"
     }
-  }
+}

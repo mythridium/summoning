@@ -1,0 +1,28 @@
+#summoning-status {
+    position: fixed;
+    bottom: 10px;
+    left: 250px;
+    display: flex;
+
+    .overlay-container {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        max-width: 100%;
+        padding: 0px;
+        margin: 3px 3px;
+
+        img {
+            margin: 0;
+            margin-bottom: 1px;
+            cursor: initial;
+        }
+
+        span {
+            position: initial;
+            padding: 0;
+            line-height: 17px;
+            font-size: 10px;
+        }
+    }
+}

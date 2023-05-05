@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/js/setup.mjs',
+    entry: './src/setup.ts',
     experiments: {
         outputModule: true
     },
@@ -17,25 +17,25 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: 'manifest.json', to: 'manifest.json' }]
+            patterns: [
+                { from: 'manifest.json', to: 'manifest.json' },
+                { from: 'src/assets', to: 'assets' }
+            ]
         })
     ],
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js']
+    },
     module: {
-        generator: {
-            'asset/resource': {
-                publicPath: 'img/',
-                outputPath: 'img/',
-                filename: '[name][ext]'
-            }
-        },
         rules: [
             {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader']
+                test: /\.s[ac]ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource'
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
             }
         ]
     }
