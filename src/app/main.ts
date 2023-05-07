@@ -1,5 +1,10 @@
 import './styles.scss';
 
+enum Type {
+    Summon1 = 'Summon1',
+    Summon2 = 'Summon2'
+}
+
 export class App {
     private isHidden = false;
     private mainContainer?: JQuery<HTMLElement>;
@@ -47,8 +52,8 @@ export class App {
 
         const summoningStatusContainer = this.getSummoningStatusContainer();
 
-        const summon1 = this.getSummon1();
-        const summon2 = this.getSummon2();
+        const summon1 = this.getSummon(Type.Summon1);
+        const summon2 = this.getSummon(Type.Summon2);
 
         summoningStatusContainer.append(summon1.element);
         summoningStatusContainer.append(summon2.element);
@@ -65,24 +70,26 @@ export class App {
         return $('<div id="summoning-status"></div>');
     }
 
-    private getSummon1() {
-        const summon = game.combat.player.equipment.slots.Summon1;
+    private getSummon(type: Type) {
+        let index = -1;
 
-        return {
-            id: summon.id,
-            quantity: summon.quantity,
-            element: $('#combat-equipment-slot-12-1').parent().clone()
-        };
-    }
+        for (const slot of game.combat.player.equipment.slotArray) {
+            index += 1;
 
-    private getSummon2() {
-        const summon = game.combat.player.equipment.slots.Summon2;
+            if (slot.type !== type) {
+                continue;
+            }
 
-        return {
-            id: summon.id,
-            quantity: summon.quantity,
-            element: $('#combat-equipment-slot-13-1').parent().clone()
-        };
+            const element = $(`#combat-equipment-slot-${index}-1`).parent().clone();
+
+            element.find('[data-tippy-root]').remove();
+
+            return {
+                id: slot.id,
+                quantity: slot.quantity,
+                element
+            };
+        }
     }
 
     private toggleVisibility() {
@@ -101,8 +108,8 @@ export class App {
     }
 
     private isDifferent() {
-        const summon1 = this.getSummon1();
-        const summon2 = this.getSummon2();
+        const summon1 = this.getSummon(Type.Summon1);
+        const summon2 = this.getSummon(Type.Summon2);
 
         return (
             summon1.id !== this.cache.summon1.id ||
