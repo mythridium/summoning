@@ -60,7 +60,7 @@ export class Creatable {
             );
 
             if (have && have.currentQuantity) {
-                result.push(have.currentQuantity / (require.qty || 1));
+                result.push(Math.floor(have.currentQuantity / (require.qty || 1)));
             }
         }
 
