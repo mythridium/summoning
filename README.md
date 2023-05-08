@@ -9,8 +9,12 @@ Display summoning tablets in the bottom left of the screen so you can see it wit
 
 The summoning status is only displayed on skills and the bank, it gets hidden on the shop, combat, golbin raid, completion log, lore, statistics and settings pages.
 
+![Summoning Status](images/summoning-status-4.png)
+
 ## Display Create Amount
 Display how many times you can create the summoning recipe based on your current materials (ignores shards).
+
+![Summoning Status](images/summoning-status-5.png)
 
 ## Reduced Opacity
 Reduces the opacity on recipes that you do not have any materials for. This makes it easier to locate recipes you do have materials for.
