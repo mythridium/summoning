@@ -26,3 +26,13 @@
         }
     }
 }
+
+.myth-summoning-status-opacity-enabled {
+    .border-item-invalid {
+        opacity: 30%;
+
+        &:hover {
+            opacity: 100%;
+        }
+    }
+}
