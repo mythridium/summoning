@@ -54,7 +54,7 @@ export class Create implements Component {
 
     private getAmount() {
         const minimumCreatable = summoningArtisanMenu.haves.icons
-            .filter((icon: ItemCurrentIcon) => icon.item.type !== 'Shard')
+            .filter((icon: ItemCurrentIcon) => icon.item?.type !== 'Shard')
             .map((icon: ItemCurrentIcon) => Math.floor(icon.currentQuantity / (icon.requiredQuantity || 1)));
 
         if (!minimumCreatable.length) {
