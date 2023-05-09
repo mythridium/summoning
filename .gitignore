@@ -2,4 +2,3 @@ node_modules
 packed
 dist
 build
-package-lock.json
