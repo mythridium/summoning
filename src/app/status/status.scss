@@ -1,0 +1,37 @@
+#summoning-status {
+    position: fixed;
+    bottom: 10px;
+    left: 250px;
+    display: flex;
+    padding: 4px 0px;
+
+    .summon {
+        display: flex;
+        flex-direction: column;
+        min-width: 60px;
+        align-items: center;
+        background: #787878;
+        padding-top: 5px;
+        border-radius: 5px;
+
+        &.summon-2 {
+            margin-left: 5px;
+        }
+
+        img {
+            margin: 0;
+            cursor: initial;
+        }
+
+        span {
+            position: initial;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 10px;
+            height: 17px;
+            border-radius: 0px;
+            margin-top: 5px;
+            min-width: 60px;
+        }
+    }
+}

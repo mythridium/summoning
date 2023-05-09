@@ -1,18 +1,14 @@
-import { Settings } from './settings';
-import { Creatable } from './creatable';
-import { Status } from './status';
-import './styles.scss';
+import { ComponentMaker } from '../framework/component';
+import { Status } from './status/status';
+import { Create } from './create/create';
+import { Opacity } from './opacity/opacity';
 
 export class App {
     constructor(private readonly context: Modding.ModContext) {}
 
     public init() {
-        const settings = new Settings(this.context);
-        const status = new Status(this.context);
-        const creatable = new Creatable(this.context);
-
-        settings.init();
-        status.init();
-        creatable.init();
+        ComponentMaker.create(this.context, Status);
+        ComponentMaker.create(this.context, Create);
+        ComponentMaker.create(this.context, Opacity);
     }
 }

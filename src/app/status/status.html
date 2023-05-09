@@ -1,0 +1,16 @@
+<template id="myth-summoning-status">
+    <div id="summoning-status" v-if="isEnabled">
+        <div class="summon summon-1">
+            <img class="combat-equip-img border border-equip border-2x" v-bind:src="summon1.img" />
+            <span class="overlay-item text-size-sm font-w600 text-white badge badge-danger">
+                {{ formatNumber(summon1.quantity) }}
+            </span>
+        </div>
+        <div class="summon summon-2">
+            <img class="combat-equip-img border border-equip border-2x" v-bind:src="summon2.img" />
+            <span class="overlay-item text-size-sm font-w600 text-white badge badge-danger">
+                {{ formatNumber(summon2.quantity) }}
+            </span>
+        </div>
+    </div>
+</template>

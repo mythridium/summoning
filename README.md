@@ -1,6 +1,6 @@
-# [Myth] Summoning Status
+# [Myth] Summoning
 
-![Summoning Status](images/summoning-status-1.png)
+![Summoning](images/overview.png)
 
 This mod contains the following features:
 
@@ -9,19 +9,19 @@ Display summoning tablets in the bottom left of the screen so you can see it wit
 
 The summoning status is only displayed on skills and the bank, it gets hidden on the shop, combat, golbin raid, completion log, lore, statistics and settings pages.
 
-![Summoning Status](images/summoning-status-4.png)
+![Status](images/status.png)
 
 ## Display Create Amount
 Display how many times you can create the summoning recipe based on your current materials (ignores shards).
 
-![Summoning Status](images/summoning-status-5.png)
+![Create](images/create.png)
 
 ## Reduced Opacity
 Reduces the opacity on recipes that you do not have any materials for. This makes it easier to locate recipes you do have materials for.
 
-![Summoning Status](images/summoning-status-2.png)
+![Opacity](images/opacity.png)
 
 ## Settings
 All features of this mod can be enabled/disabled.
 
-![Summoning Status](images/summoning-status-3.png)
+![Settings](images/settings.png)

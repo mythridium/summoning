@@ -18,6 +18,7 @@ module.exports = {
     plugins: [
         new CopyPlugin({
             patterns: [
+                { from: '**/*.html', to: '[path][name][ext]', context: 'src/app' },
                 { from: 'manifest.json', to: 'manifest.json' },
                 { from: 'src/assets', to: 'assets' }
             ]

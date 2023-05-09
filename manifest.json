@@ -1,5 +1,5 @@
 {
-    "namespace": "mythSummoningStatus",
+    "namespace": "mythSummoning",
     "setup": "setup.mjs",
     "icon": "assets/logo.png"
 }
