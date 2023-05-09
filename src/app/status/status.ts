@@ -41,12 +41,17 @@ export class Status implements Component {
     private readonly emptyIcon = 'assets/media/bank/misc_summon.png';
 
     private get isEnabled() {
-        return this.context.settings.section(this.settings.section).get(this.settings.config.name) as boolean;
+        return (
+            this.isVisible() &&
+            (this.context.settings.section(this.settings.section).get(this.settings.config.name) as boolean)
+        );
     }
 
     private readonly renderer = new Renderer(this.context).create<RendererContext>({
         shouldRender: () =>
-            game.combat.player.rendersRequired.equipment || game.summoning.renderQueue.synergyQuantities,
+            game.combat.player.rendersRequired.equipment ||
+            game.summoning.renderQueue.synergyQuantities ||
+            game.potions.renderRequired,
         getUpdateState: () => this.getState(),
         component: {
             $template: '#myth-summoning-status',
@@ -82,5 +87,24 @@ export class Status implements Component {
         const summon = game.combat.player.equipment.slots[type];
 
         return { img: summon.isEmpty ? this.emptyIcon : summon.item.media, quantity: summon.quantity };
+    }
+
+    private isVisible() {
+        if (game.isGolbinRaid) {
+            return false;
+        }
+
+        switch (game.openPage.id) {
+            case 'melvorD:Shop':
+            case 'melvorD:Combat':
+            case 'melvorD:GolbinRaid':
+            case 'melvorD:CompletionLog':
+            case 'melvorD:Lore':
+            case 'melvorD:Statistics':
+            case 'melvorD:Settings':
+                return false;
+            default:
+                return true;
+        }
     }
 }

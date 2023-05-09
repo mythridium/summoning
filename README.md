@@ -7,6 +7,8 @@ This mod contains the following features:
 ## Summoning Status
 Display summoning tablets in the bottom left of the screen so you can see it without needing to open the equipment screen.
 
+The summoning status is only displayed on skills and the bank, it gets hidden on the shop, combat, golbin raid, completion log, lore, statistics and settings pages.
+
 ![Status](images/status.png)
 
 ## Display Create Amount
