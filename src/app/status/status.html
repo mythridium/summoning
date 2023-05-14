@@ -1,5 +1,5 @@
 <template id="myth-summoning-status">
-    <div id="summoning-status" v-if="isEnabled">
+    <div id="summoning-status" v-if="isEnabled" :class="position">
         <div class="summon summon-1">
             <img class="combat-equip-img border border-equip border-2x" v-bind:src="summon1.img" />
             <span class="overlay-item text-size-sm font-w600 text-white badge badge-danger">

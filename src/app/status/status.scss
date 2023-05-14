@@ -1,9 +1,16 @@
 #summoning-status {
     position: fixed;
     bottom: 10px;
-    left: 250px;
     display: flex;
     padding: 4px 0px;
+
+    &.left {
+        left: 250px;
+    }
+
+    &.center {
+        left: 50%;
+    }
 
     .summon {
         display: flex;
