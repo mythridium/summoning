@@ -140,6 +140,8 @@ export class Status implements Component {
             case 'melvorD:Lore':
             case 'melvorD:Statistics':
             case 'melvorD:Settings':
+            case 'melvorAoD:Cartography':
+            case 'melvorAoD:Archaeology':
                 return false;
             default:
                 return true;
