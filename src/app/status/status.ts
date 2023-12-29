@@ -29,7 +29,7 @@ export class Status implements Component {
             {
                 type: 'switch',
                 name: 'status',
-                label: 'Enable Summoning Tablet Display',
+                label: 'Enable Summoning Tablet Display [Desktop]',
                 hint: 'Display the currently equipped summoning tablets on the interface.',
                 default: true,
                 onChange: (value: boolean) => {
@@ -44,7 +44,7 @@ export class Status implements Component {
             {
                 type: 'dropdown',
                 name: 'position',
-                label: 'Summoning Tablet Position',
+                label: 'Summoning Tablet Position [Desktop]',
                 hint: 'Position of the summoning tablet.',
                 default: 'left',
                 options: [
@@ -128,6 +128,10 @@ export class Status implements Component {
     }
 
     private isVisible() {
+        if (nativeManager.isMobile) {
+            return false;
+        }
+
         if (game.isGolbinRaid) {
             return false;
         }
