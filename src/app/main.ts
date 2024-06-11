@@ -1,4 +1,4 @@
-import { ComponentMaker } from '../framework/component';
+import { ComponentMaker } from 'src/framework/component';
 import { Status } from './status/status';
 import { Create } from './create/create';
 import { Opacity } from './opacity/opacity';

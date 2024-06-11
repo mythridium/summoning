@@ -1,5 +1,5 @@
-import { Component } from '../../framework/component';
 import './opacity.scss';
+import { Component } from 'src/framework/component';
 
 export class Opacity implements Component {
     public readonly settings = {
@@ -27,6 +27,7 @@ export class Opacity implements Component {
     }
 
     private onChange(value: boolean) {
-        summoningArtisanMenu.container.classList.toggle(this.opacityClass, value);
+        // @ts-ignore // TODO: TYPES
+        summoningArtisanMenu.dropDownContainer.classList.toggle(this.opacityClass, value);
     }
 }

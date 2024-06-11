@@ -1,6 +1,7 @@
-import { Component } from '../../framework/component';
-import { Renderer } from '../../framework/renderer';
 import './status.scss';
+import { Component } from 'src/framework/component';
+import { Renderer } from 'src/framework/renderer';
+import { Component as RendererComponent } from 'src/framework/renderer';
 
 interface SummoningStatus {
     img: string;
@@ -17,12 +18,12 @@ interface RendererContext {
 type Position = 'left' | 'center';
 
 enum Type {
-    Summon1 = 'Summon1',
-    Summon2 = 'Summon2'
+    Summon1 = 'melvorD:Summon1',
+    Summon2 = 'melvorD:Summon2'
 }
 
 export class Status implements Component {
-    public readonly template = 'status/status.html';
+    public readonly template = 'app/status/status.html';
     public readonly settings = {
         section: 'General',
         config: [
@@ -82,28 +83,31 @@ export class Status implements Component {
         return this.context.settings.section(this.settings.section).get(this.settings.config[1].name) as Position;
     }
 
-    private readonly renderer = new Renderer(this.context).create<RendererContext>({
-        shouldRender: () =>
-            game.combat.player.rendersRequired.equipment ||
-            game.summoning.renderQueue.synergyQuantities ||
-            game.potions.renderRequired,
-        getUpdateState: () => this.getState(),
-        component: {
-            $template: '#myth-summoning-status',
-            summon1: { img: '', quantity: 0 },
-            summon2: { img: '', quantity: 0 },
-            isEnabled: false,
-            position: 'left',
-            update({ isEnabled, position, summon1, summon2 }) {
-                this.isEnabled = isEnabled;
-                this.position = position;
-                this.summon1 = summon1;
-                this.summon2 = summon2;
-            }
-        }
-    });
+    private readonly renderer: RendererComponent<RendererContext>;
 
-    constructor(private readonly context: Modding.ModContext) {}
+    constructor(private readonly context: Modding.ModContext) {
+        this.renderer = new Renderer(this.context).create<RendererContext>({
+            shouldRender: () =>
+                // @ts-ignore // TODO: TYPES
+                game.combat.player.renderQueue.equipment ||
+                game.summoning.renderQueue.synergyQuantities ||
+                game.potions.renderRequired,
+            getUpdateState: () => this.getState(),
+            component: {
+                $template: '#myth-summoning-status',
+                summon1: { img: '', quantity: 0 },
+                summon2: { img: '', quantity: 0 },
+                isEnabled: false,
+                position: 'left',
+                update({ isEnabled, position, summon1, summon2 }) {
+                    this.isEnabled = isEnabled;
+                    this.position = position;
+                    this.summon1 = summon1;
+                    this.summon2 = summon2;
+                }
+            }
+        });
+    }
 
     public init() {
         this.context.onInterfaceReady(() => {
@@ -122,7 +126,8 @@ export class Status implements Component {
     }
 
     private getSummon(type: Type) {
-        const summon = game.combat.player.equipment.slots[type];
+        // @ts-ignore // TODO: TYPES
+        const summon = game.combat.player.equipment.equippedItems[type];
 
         return { img: summon.isEmpty ? this.emptyIcon : summon.item.media, quantity: summon.quantity };
     }

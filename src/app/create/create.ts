@@ -1,9 +1,9 @@
-import { Component } from '../../framework/component';
-import { Renderer } from '../../framework/renderer';
 import './create.scss';
+import { Component } from 'src/framework/component';
+import { Renderer, Component as RendererComponent } from 'src/framework/renderer';
 
 export class Create implements Component {
-    public readonly template = 'create/create.html';
+    public readonly template = 'app/create/create.html';
     public readonly settings = {
         section: 'General',
         config: {
@@ -22,25 +22,28 @@ export class Create implements Component {
         return this.context.settings.section(this.settings.section).get(this.settings.config.name) as boolean;
     }
 
-    private readonly renderer = new Renderer(this.context).create<{ amount: number; isEnabled: boolean }>({
-        shouldRender: () => game.summoning.renderQueue.quantities || game.summoning.renderQueue.selectedRecipe,
-        getUpdateState: () => this.getState(),
-        component: {
-            $template: '#myth-summoning-create',
-            amount: 0,
-            isEnabled: false,
-            update({ amount, isEnabled }) {
-                this.amount = amount;
-                this.isEnabled = isEnabled;
-            }
-        }
-    });
+    private readonly renderer: RendererComponent<{ amount: number; isEnabled: boolean }>;
 
-    constructor(private readonly context: Modding.ModContext) {}
+    constructor(private readonly context: Modding.ModContext) {
+        this.renderer = new Renderer(this.context).create<{ amount: number; isEnabled: boolean }>({
+            shouldRender: () => game.summoning.renderQueue.quantities || game.summoning.renderQueue.selectedRecipe,
+            getUpdateState: () => this.getState(),
+            component: {
+                $template: '#myth-summoning-create',
+                amount: 0,
+                isEnabled: false,
+                update({ amount, isEnabled }) {
+                    this.amount = amount;
+                    this.isEnabled = isEnabled;
+                }
+            }
+        });
+    }
 
     public init() {
         this.context.onInterfaceReady(() => {
-            ui.create(this.renderer, summoningArtisanMenu.ingredientsCol);
+            // @ts-ignore // TODO: TYPES
+            ui.create(this.renderer, summoningArtisanMenu.haves.parentElement.parentElement);
             this.renderer.update(this.getState());
         });
     }
@@ -53,7 +56,8 @@ export class Create implements Component {
     }
 
     private getAmount() {
-        const minimumCreatable = summoningArtisanMenu.haves.icons
+        // @ts-ignore // TODO: TYPES
+        const minimumCreatable = summoningArtisanMenu.haves.icons.items
             .filter((icon: ItemCurrentIcon) => icon.item?.type !== 'Shard')
             .map((icon: ItemCurrentIcon) => Math.floor(icon.currentQuantity / (icon.requiredQuantity || 1)));
 
