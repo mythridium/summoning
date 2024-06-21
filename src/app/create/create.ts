@@ -26,7 +26,9 @@ export class Create implements Component {
 
     constructor(private readonly context: Modding.ModContext) {
         this.renderer = new Renderer(this.context).create<{ amount: number; isEnabled: boolean }>({
-            shouldRender: () => game.summoning.renderQueue.quantities || game.summoning.renderQueue.selectedRecipe,
+            shouldRender: () =>
+                !loadingOfflineProgress &&
+                (game.summoning.renderQueue.quantities || game.summoning.renderQueue.selectedRecipe),
             getUpdateState: () => this.getState(),
             component: {
                 $template: '#myth-summoning-create',
@@ -56,9 +58,17 @@ export class Create implements Component {
     }
 
     private getAmount() {
-        // @ts-ignore // TODO: TYPES
-        const minimumCreatable = summoningArtisanMenu.haves.icons.items
-            .filter((icon: ItemCurrentIcon) => icon.item?.type !== 'Shard')
+        const icons = [
+            // @ts-ignore // TODO: TYPES
+            ...summoningArtisanMenu.haves.icons.currencies,
+            // @ts-ignore // TODO: TYPES
+            ...summoningArtisanMenu.haves.icons.items
+        ];
+
+        const isOnlyShards = icons.filter((icon: ItemCurrentIcon) => icon.item?.type !== 'Shard').length === 0;
+
+        const minimumCreatable = icons
+            .filter((icon: ItemCurrentIcon) => isOnlyShards || icon.item?.type !== 'Shard')
             .map((icon: ItemCurrentIcon) => Math.floor(icon.currentQuantity / (icon.requiredQuantity || 1)));
 
         if (!minimumCreatable.length) {

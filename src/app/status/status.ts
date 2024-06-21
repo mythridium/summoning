@@ -88,10 +88,11 @@ export class Status implements Component {
     constructor(private readonly context: Modding.ModContext) {
         this.renderer = new Renderer(this.context).create<RendererContext>({
             shouldRender: () =>
+                !loadingOfflineProgress &&
                 // @ts-ignore // TODO: TYPES
-                game.combat.player.renderQueue.equipment ||
-                game.summoning.renderQueue.synergyQuantities ||
-                game.potions.renderRequired,
+                (game.combat.player.renderQueue.equipment ||
+                    game.summoning.renderQueue.synergyQuantities ||
+                    game.potions.renderRequired),
             getUpdateState: () => this.getState(),
             component: {
                 $template: '#myth-summoning-status',
